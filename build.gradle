@@ -1,0 +1,77 @@
+group 'com.gdj'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'application' //可选(可自动生成shell启动脚本)
+
+//这里是关键（把java与scala的源代码目录全映射到scala上,
+// 这样gradle compileScala时就能同时编译java与scala的源代码）
+sourceSets {
+    main {
+        scala {
+            srcDirs = ['src/main/scala', 'src/main/java']
+        }
+        java {
+            srcDirs = []
+        }
+    }
+
+    test {
+        scala {
+            srcDirs = ['src/test/scala', 'src/test/java']
+        }
+        java {
+            srcDirs = []
+        }
+    }
+}
+
+//可选（项目初始化时,可用gradle cDirs生成scala及java的src目录）
+task "createDirs" {
+    sourceSets*.scala.srcDirs*.each { it.mkdirs() }
+    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
+
+repositories {
+    mavenLocal()
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    mavenCentral()
+}
+
+dependencies {
+// https://mvnrepository.com/artifact/ch.qos.logback/logback-core
+    compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
+// https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+    testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+// https://mvnrepository.com/artifact/org.slf4j/log4j-over-slf4j
+    compile group: 'org.slf4j', name: 'log4j-over-slf4j', version: '1.7.15'
+// https://mvnrepository.com/artifact/org.apache.flink/flink-scala
+    compile group: 'org.apache.flink', name: 'flink-scala_2.11', version: '1.7.2'
+// https://mvnrepository.com/artifact/org.apache.flink/flink-streaming-scala
+    compile group: 'org.apache.flink', name: 'flink-streaming-scala_2.11', version: '1.7.2'
+// https://mvnrepository.com/artifact/org.apache.flink/flink-connector-kafka-0.11
+    compile group: 'org.apache.flink', name: 'flink-connector-kafka-0.11_2.11', version: '1.7.2'
+// https://mvnrepository.com/artifact/org.apache.bahir/flink-connector-redis
+    compile group: 'org.apache.bahir', name: 'flink-connector-redis_2.11', version: '1.0'
+// https://mvnrepository.com/artifact/org.apache.flink/flink-connector-elasticsearch6
+    compile group: 'org.apache.flink', name: 'flink-connector-elasticsearch6_2.11', version: '1.7.2'
+// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.44'
+// https://mvnrepository.com/artifact/org.apache.flink/flink-statebackend-rocksdb
+    testCompile group: 'org.apache.flink', name: 'flink-statebackend-rocksdb_2.11', version: '1.7.2'
+
+    compile group: 'org.apache.flink', name: 'flink-cep-scala-2.11', version: '1.7.2'
+// https://mvnrepository.com/artifact/org.apache.flink/flink-table
+    compile group: 'org.apache.flink', name: 'flink-table_2.11', version: '1.7.2'
+    compile "org.scala-lang:scala-library:2.11.7"
+    compile "org.scala-lang:scala-compiler:2.11.7"
+    compile "org.scala-lang:scala-reflect:2.11.7"
+    testCompile "junit:junit:4.11"
+
+}
+configurations{
+    compile.exclude group: 'log4j', module: '*'
+    compile.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+}

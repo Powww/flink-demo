@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ComposerJsonPluginSettings">
+    <unboundedVersionInspectionSettings>
+      <excludedPackages>
+        <pattern pattern="roave/security-advisories" />
+      </excludedPackages>
+    </unboundedVersionInspectionSettings>
+    <customRepositories />
+    <composerUpdateOptions />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="JUnitGeneratorProjectSettings">
+    <option name="outputFilePattern" value="${SOURCEPATH}/../../test/java/${PACKAGE}/${FILENAME}" />
+    <option name="selectedTemplateKey" value="JUnit 4" />
+    <option name="vmTemplates">
+      <map>
+        <entry key="JUnit 3" value="######################################################################################## &#10;## &#10;## Available variables: &#10;##         $entryList.methodList - List of method composites &#10;##         $entryList.privateMethodList - List of private method composites &#10;##         $entryList.fieldList - ArrayList of class scope field names &#10;##         $entryList.className - class name &#10;##         $entryList.packageName - package name &#10;##         $today - Todays date in MM/dd/yyyy format &#10;## &#10;##            MethodComposite variables: &#10;##                $method.name - Method Name &#10;##                $method.signature - Full method signature in String form &#10;##                $method.reflectionCode - list of strings representing commented out reflection code to access method (Private Methods) &#10;##                $method.paramNames - List of Strings representing the method's parameters' names &#10;##                $method.paramClasses - List of Strings representing the method's parameters' classes &#10;## &#10;## You can configure the output class name using &quot;testClass&quot; variable below. &#10;## Here are some examples: &#10;## Test${entry.ClassName} - will produce TestSomeClass &#10;## ${entry.className}Test - will produce SomeClassTest &#10;## &#10;######################################################################################## &#10;## &#10;#macro (cap $strIn)$strIn.valueOf($strIn.charAt(0)).toUpperCase()$strIn.substring(1)#end &#10;## Iterate through the list and generate testcase for every entry. &#10;#foreach ($entry in $entryList) &#10;#set( $testClass=&quot;${entry.className}Test&quot;) &#10;## &#10;package test.$entry.packageName; &#10;&#10;import junit.framework.Test; &#10;import junit.framework.TestSuite; &#10;import junit.framework.TestCase; &#10;&#10;/** &#10;* ${entry.className} Tester. &#10;* &#10;* @author &lt;Authors name&gt; &#10;* @since &lt;pre&gt;$today&lt;/pre&gt; &#10;* @version 1.0 &#10;*/ &#10;public class $testClass extends TestCase { &#10;public $testClass(String name) { &#10;super(name); &#10;} &#10;&#10;public void setUp() throws Exception { &#10;super.setUp(); &#10;} &#10;&#10;public void tearDown() throws Exception { &#10;super.tearDown(); &#10;} &#10;&#10;#foreach($method in $entry.methodList) &#10;/** &#10;* &#10;* Method: $method.signature &#10;* &#10;*/ &#10;public void test#cap(${method.name})() throws Exception { &#10;//TODO: Test goes here... &#10;} &#10;&#10;#end &#10;&#10;#foreach($method in $entry.privateMethodList) &#10;/** &#10;* &#10;* Method: $method.signature &#10;* &#10;*/ &#10;public void test#cap(${method.name})() throws Exception { &#10;//TODO: Test goes here... &#10;#foreach($string in $method.reflectionCode) &#10;$string &#10;#end &#10;} &#10;&#10;#end &#10;&#10;public static Test suite() { &#10;return new TestSuite(${testClass}.class); &#10;} &#10;} &#10;#end" />
+        <entry key="JUnit 4" value="######################################################################################## &#10;## &#10;## Available variables: &#10;##         $entryList.methodList - List of method composites &#10;##         $entryList.privateMethodList - List of private method composites &#10;##         $entryList.fieldList - ArrayList of class scope field names &#10;##         $entryList.className - class name &#10;##         $entryList.packageName - package name &#10;##         $today - Todays date in MM/dd/yyyy format &#10;## &#10;##            MethodComposite variables: &#10;##                $method.name - Method Name &#10;##                $method.signature - Full method signature in String form &#10;##                $method.reflectionCode - list of strings representing commented out reflection code to access method (Private Methods) &#10;##                $method.paramNames - List of Strings representing the method's parameters' names &#10;##                $method.paramClasses - List of Strings representing the method's parameters' classes &#10;## &#10;## You can configure the output class name using &quot;testClass&quot; variable below. &#10;## Here are some examples: &#10;## Test${entry.ClassName} - will produce TestSomeClass &#10;## ${entry.className}Test - will produce SomeClassTest &#10;## &#10;######################################################################################## &#10;## &#10;#macro (cap $strIn)$strIn.valueOf($strIn.charAt(0)).toUpperCase()$strIn.substring(1)#end &#10;## Iterate through the list and generate testcase for every entry. &#10;#foreach ($entry in $entryList) &#10;#set( $testClass=&quot;${entry.className}Test&quot;) &#10;## &#10;package $entry.packageName; &#10;&#10;import org.junit.Test; &#10;import org.junit.Before; &#10;import org.junit.After; &#10;&#10;/** &#10;* ${entry.className} Tester. &#10;* &#10;* @author &lt;Authors name&gt; &#10;* @since &lt;pre&gt;$date&lt;/pre&gt; &#10;* @version 1.0 &#10;*/ &#10;public class $testClass { &#10;&#10;@Before&#10;public void before() throws Exception { &#10;} &#10;&#10;@After&#10;public void after() throws Exception { &#10;} &#10;&#10;#foreach($method in $entry.methodList) &#10;/** &#10;* &#10;* Method: $method.signature &#10;* &#10;*/ &#10;@Test&#10;public void test#cap(${method.name})() throws Exception { &#10;//TODO: Test goes here... &#10;} &#10;&#10;#end &#10;&#10;#foreach($method in $entry.privateMethodList) &#10;/** &#10;* &#10;* Method: $method.signature &#10;* &#10;*/ &#10;@Test&#10;public void test#cap(${method.name})() throws Exception { &#10;//TODO: Test goes here... &#10;#foreach($string in $method.reflectionCode) &#10;$string &#10;#end &#10;} &#10;&#10;#end &#10;} &#10;#end" />
+      </map>
+    </option>
+  </component>
+  <component name="PhpRuntimeConfiguration">
+    <extensions>
+      <extension name="Core" enabled="false" />
+      <extension name="Ev" enabled="false" />
+      <extension name="PDO" enabled="false" />
+      <extension name="Phar" enabled="false" />
+      <extension name="Reflection" enabled="false" />
+      <extension name="SPL" enabled="false" />
+      <extension name="SQLite" enabled="false" />
+      <extension name="SimpleXML" enabled="false" />
+      <extension name="SplType" enabled="false" />
+      <extension name="Zend OPcache" enabled="false" />
+      <extension name="ZendDebugger" enabled="false" />
+      <extension name="ZendUtils" enabled="false" />
+      <extension name="amqp" enabled="false" />
+      <extension name="apache" enabled="false" />
+      <extension name="apcu" enabled="false" />
+      <extension name="bcmath" enabled="false" />
+      <extension name="bz2" enabled="false" />
+      <extension name="calendar" enabled="false" />
+      <extension name="cassandra" enabled="false" />
+      <extension name="couchbase" enabled="false" />
+      <extension name="ctype" enabled="false" />
+      <extension name="cubrid" enabled="false" />
+      <extension name="curl" enabled="false" />
+      <extension name="date" enabled="false" />
+      <extension name="dba" enabled="false" />
+      <extension name="dom" enabled="false" />
+      <extension name="enchant" enabled="false" />
+      <extension name="exif" enabled="false" />
+      <extension name="fann" enabled="false" />
+      <extension name="ffmpeg" enabled="false" />
+      <extension name="fileinfo" enabled="false" />
+      <extension name="filter" enabled="false" />
+      <extension name="fpm" enabled="false" />
+      <extension name="ftp" enabled="false" />
+      <extension name="gd" enabled="false" />
+      <extension name="gearman" enabled="false" />
+      <extension name="geoip" enabled="false" />
+      <extension name="geos" enabled="false" />
+      <extension name="gettext" enabled="false" />
+      <extension name="gmagick" enabled="false" />
+      <extension name="gmp" enabled="false" />
+      <extension name="gnupg" enabled="false" />
+      <extension name="grpc" enabled="false" />
+      <extension name="hash" enabled="false" />
+      <extension name="http" enabled="false" />
+      <extension name="ibm_db2" enabled="false" />
+      <extension name="iconv" enabled="false" />
+      <extension name="igbinary" enabled="false" />
+      <extension name="imagick" enabled="false" />
+      <extension name="imap" enabled="false" />
+      <extension name="inotify" enabled="false" />
+      <extension name="interbase" enabled="false" />
+      <extension name="intl" enabled="false" />
+      <extension name="json" enabled="false" />
+      <extension name="judy" enabled="false" />
+      <extension name="ldap" enabled="false" />
+      <extension name="libevent" enabled="false" />
+      <extension name="libsodium" enabled="false" />
+      <extension name="libxml" enabled="false" />
+      <extension name="mailparse" enabled="false" />
+      <extension name="mbstring" enabled="false" />
+      <extension name="mcrypt" enabled="false" />
+      <extension name="memcache" enabled="false" />
+      <extension name="memcached" enabled="false" />
+      <extension name="meta" enabled="false" />
+      <extension name="ming" enabled="false" />
+      <extension name="mongo" enabled="false" />
+      <extension name="mongodb" enabled="false" />
+      <extension name="mqseries" enabled="false" />
+      <extension name="mssql" enabled="false" />
+      <extension name="mysql" enabled="false" />
+      <extension name="mysql_xdevapi" enabled="false" />
+      <extension name="mysqli" enabled="false" />
+      <extension name="ncurses" enabled="false" />
+      <extension name="newrelic" enabled="false" />
+      <extension name="oauth" enabled="false" />
+      <extension name="oci8" enabled="false" />
+      <extension name="odbc" enabled="false" />
+      <extension name="openssl" enabled="false" />
+      <extension name="pcntl" enabled="false" />
+      <extension name="pcre" enabled="false" />
+      <extension name="pdflib" enabled="false" />
+      <extension name="pdo_ibm" enabled="false" />
+      <extension name="pdo_mysql" enabled="false" />
+      <extension name="pdo_pgsql" enabled="false" />
+      <extension name="pdo_sqlite" enabled="false" />
+      <extension name="pgsql" enabled="false" />
+      <extension name="posix" enabled="false" />
+      <extension name="pspell" enabled="false" />
+      <extension name="pthreads" enabled="false" />
+      <extension name="radius" enabled="false" />
+      <extension name="rar" enabled="false" />
+      <extension name="readline" enabled="false" />
+      <extension name="recode" enabled="false" />
+      <extension name="redis" enabled="false" />
+      <extension name="regex" enabled="false" />
+      <extension name="rrd" enabled="false" />
+      <extension name="session" enabled="false" />
+      <extension name="shmop" enabled="false" />
+      <extension name="snmp" enabled="false" />
+      <extension name="soap" enabled="false" />
+      <extension name="sockets" enabled="false" />
+      <extension name="sodium" enabled="false" />
+      <extension name="sqlite3" enabled="false" />
+      <extension name="sqlsrv" enabled="false" />
+      <extension name="ssh2" enabled="false" />
+      <extension name="standard" enabled="false" />
+      <extension name="suhosin" enabled="false" />
+      <extension name="superglobals" enabled="false" />
+      <extension name="svn" enabled="false" />
+      <extension name="sybase" enabled="false" />
+      <extension name="sysvmsg" enabled="false" />
+      <extension name="sysvsem" enabled="false" />
+      <extension name="sysvshm" enabled="false" />
+      <extension name="tidy" enabled="false" />
+      <extension name="tokenizer" enabled="false" />
+      <extension name="v8js" enabled="false" />
+      <extension name="wddx" enabled="false" />
+      <extension name="win32service" enabled="false" />
+      <extension name="wincache" enabled="false" />
+      <extension name="xdebug" enabled="false" />
+      <extension name="xhprof" enabled="false" />
+      <extension name="xml" enabled="false" />
+      <extension name="xmlreader" enabled="false" />
+      <extension name="xmlrpc" enabled="false" />
+      <extension name="xmlwriter" enabled="false" />
+      <extension name="xsl" enabled="false" />
+      <extension name="yaml" enabled="false" />
+      <extension name="zend" enabled="false" />
+      <extension name="zip" enabled="false" />
+      <extension name="zlib" enabled="false" />
+      <extension name="zmq" enabled="false" />
+    </extensions>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
